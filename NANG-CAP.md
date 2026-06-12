@@ -1,19 +1,3 @@
-# 🌸 Nâng cấp v2 — "Sợi Chỉ Vàng"
-
-> ## 🩺 Mới trong v2.2 — Chống cache triệt để + trang tự chẩn đoán
-> Sau sự cố "sửa playlist mà trình duyệt vẫn thấy bài cũ" (cache 1 giờ của http-server còn hạn thì `-c-1` cũng không cứu được những gì ĐÃ cache):
-> - **`check.html`** — mở `http://127.0.0.1:8080/check.html` để biết chính xác thư mục đang serve: đúng phiên bản chưa, playlist trỏ file có thật không (kiểm từng bài!), ảnh nào thiếu. Mọi request của trang này đều `no-store` nên không bao giờ bị cache đánh lừa. Test E2E 11/11.
-> - **Đổi version query** `?ver=2.2` cho toàn bộ CSS/JS trong index.html → URL mới = cache cũ vô hiệu, chỉ cần F5 thường.
-> - `$.ajaxSetup({cache:false})` cho components, `fetch(..., {cache:'no-cache'})` cho file ngôn ngữ.
-> - **Beacon phiên bản**: mở Console (F12) thấy `💍 Wedding site v2.2` = đang chạy bản mới; không thấy = còn dính cache.
-> - Ảnh thiếu file hiển thị khung ngà có viền vàng thay vì icon vỡ (class `.img-missing`).
-> - Thay 96 placeholder `/api/placeholder/400/300` trong gallery bằng SVG inline → hết 404 rác trong log.
-> - Player dừng sau đúng 1 vòng nếu cả playlist lỗi, panel tự mở hiện `⚠ <tên file>` (sửa vòng lặp 404 vô hạn của v2.0).
-
-Tài liệu này tóm tắt mọi thay đổi so với bản gốc, kèm ghi chú giảng dạy cho từng kỹ thuật mới. **Toàn bộ kiến trúc component-loader + module IIFE được giữ nguyên** — chỉ nâng cấp, không đập đi xây lại.
-
----
-
 ## 1. Tính năng mới
 
 ### 🎵 Nhạc nền phát ngẫu nhiên
