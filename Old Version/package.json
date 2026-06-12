@@ -1,0 +1,14 @@
+{
+  "name": "quoc-viet-thanh-thuy-wedding",
+  "version": "1.0.0",
+  "description": "Wedding website for Quốc Việt & Thanh Thủy",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8080"
+  },
+  "author": "Quốc Việt & Thanh Thủy",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

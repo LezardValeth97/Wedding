@@ -1,11 +1,11 @@
 <section id="events" class="events">
 	<div class="container">
-		<div class="section-header">
+		<div class="section-header" data-reveal>
 			<h2 class="section-title">Wedding Events</h2>
 			<p class="section-subtitle">Join us to celebrate our special day</p>
 		</div>
 		<div class="events-container">
-			<div class="event-card">
+			<div class="event-card" data-reveal="zoom">
 				<div class="event-image">
 					<picture>
 						<source srcset="images/promesCenter.webp" type="image/webp">
@@ -13,6 +13,9 @@
 					</picture>
 				</div>
 				<div class="event-details">
+					<!-- NOTE: i18n.js reads .event-info:nth-child(2..4) inside
+					     .event-details — keep h3 + the three .event-info rows
+					     in this exact order. New elements go AFTER them. -->
 					<h3 class="event-title">Wedding Celebration</h3>
 					<div class="event-info">
 						<i class="fas fa-calendar"></i>
@@ -20,13 +23,22 @@
 					</div>
 					<div class="event-info">
 						<i class="fas fa-map-marker-alt"></i>
-						<span>Trung Tâm Tiệc Cưới & Sự Kiện Promes Center</span>
+						<span>Trung Tâm Tiệc Cưới &amp; Sự Kiện Promes Center</span>
 					</div>
 					<div class="event-info">
 						<i class="fas fa-map"></i>
 						<span>122 - 124, Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội 10000</span>
 					</div>
 					<p class="event-description">Please join us for our wedding celebration at Promes Center. The morning will feature a traditional Vietnamese wedding ceremony, followed by a delightful lunch and joyful festivities. We look forward to sharing this special moment with you as we begin our new journey together.</p>
+
+					<div class="event-actions">
+						<a class="btn-outline" id="event-directions"
+						   href="https://www.google.com/maps/search/?api=1&query=Promes+Center+122+124+Xu%C3%A2n+Th%E1%BB%A7y+C%E1%BA%A7u+Gi%E1%BA%A5y+H%C3%A0+N%E1%BB%99i"
+						   target="_blank" rel="noopener">
+							<i class="fas fa-route"></i>
+							<span class="event-directions-text">Get Directions</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

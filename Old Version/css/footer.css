@@ -1,0 +1,28 @@
+/**
+ * Footer Styles
+ * Styles for the footer section
+ */
+
+footer {
+	background-color: var(--dark-color);
+	color: var(--light-color);
+	text-align: center;
+	padding: 40px 0;
+}
+
+.footer-logo {
+	font-family: 'Dancing Script', cursive;
+	font-size: 2rem;
+	color: var(--primary-color);
+	margin-bottom: 20px;
+}
+
+.footer-text {
+	margin-bottom: 20px;
+}
+
+.copyright {
+	font-size: 0.9rem;
+	opacity: 0.7;
+	margin-top: 20px;
+}

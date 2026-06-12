@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🩺 Chẩn đoán — Wedding Website</title>
+<style>
+	:root { --gold:#a87e4b; --ink:#2b2230; --ok:#2e7d32; --bad:#b3261e; --warn:#9a6b00; }
+	* { box-sizing: border-box; }
+	body { font-family: system-ui, 'Segoe UI', sans-serif; background:#fbf7f1; color:var(--ink);
+		max-width: 880px; margin: 0 auto; padding: 32px 18px 60px; line-height:1.6; }
+	h1 { font-size: 1.5rem; } h1 small { font-weight:400; color:#777; font-size:.8rem; }
+	.card { background:#fff; border:1px solid #ecd9bd; border-radius:12px; padding:18px 20px; margin:14px 0;
+		box-shadow:0 4px 16px rgba(43,34,48,.06); }
+	.card h2 { margin:0 0 10px; font-size:1.02rem; }
+	.row { display:flex; gap:10px; align-items:flex-start; padding:6px 0; border-bottom:1px dashed #f0e6d6; font-size:.92rem; }
+	.row:last-child { border-bottom:none; }
+	.st { flex-shrink:0; width:22px; text-align:center; }
+	.ok { color:var(--ok); } .bad { color:var(--bad); } .warn { color:var(--warn); }
+	code { background:#f6efe3; padding:1px 6px; border-radius:6px; font-size:.85em; }
+	.hint { color:#6b5d74; font-size:.84rem; margin-top:4px; }
+	#verdict { font-size:1rem; padding:16px 20px; border-radius:12px; margin-top:20px; }
+	#verdict.good { background:#e9f5ea; border:1px solid #bfe3c2; }
+	#verdict.issues { background:#fdecea; border:1px solid #f5c6c2; }
+	a.btn { display:inline-block; margin-top:10px; background:var(--gold); color:#fff; text-decoration:none;
+		padding:10px 22px; border-radius:30px; font-weight:600; font-size:.9rem; }
+	.muted { color:#888; font-size:.8rem; }
+</style>
+</head>
+<body>
+<h1>🩺 Chẩn đoán Wedding Website <small id="meta"></small></h1>
+<p class="muted">Trang này <b>không bao giờ dùng cache</b> (mọi request đều <code>no-store</code>),
+nên kết quả phản ánh đúng những gì <b>đang nằm trên đĩa</b> trong thư mục mà http-server phục vụ.</p>
+
+<div class="card"><h2>1️⃣ Phiên bản mã nguồn đang được phục vụ</h2><div id="g-version"></div></div>
+<div class="card"><h2>2️⃣ Nhạc nền</h2><div id="g-music"></div></div>
+<div class="card"><h2>3️⃣ Hình ảnh chính</h2><div id="g-images"></div></div>
+<div class="card"><h2>4️⃣ Tài nguyên cốt lõi</h2><div id="g-core"></div></div>
+<div id="verdict"></div>
+
+<script>
+(async function() {
+	const issues = [];
+	document.getElementById('meta').textContent =
+		'· ' + location.origin + ' · ' + new Date().toLocaleString('vi-VN');
+
+	function row(group, status, label, hint) {
+		const icons = { ok:'✅', bad:'❌', warn:'⚠️' };
+		const div = document.createElement('div');
+		div.className = 'row';
+		div.innerHTML = '<span class="st ' + status + '">' + icons[status] + '</span>' +
+			'<span>' + label + (hint ? '<div class="hint">' + hint + '</div>' : '') + '</span>';
+		document.getElementById(group).appendChild(div);
+		if (status === 'bad') issues.push(label);
+	}
+
+	// fetch luôn tươi mới — đây chính là kỹ thuật chống cache đáng dạy
+	const fresh = (url) => fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now(),
+		{ cache: 'no-store' });
+	const exists = async (url, method) => {
+		try { const r = await fresh(url); return r.ok; } catch (e) { return false; }
+	};
+
+	/* ---------- 1. Phiên bản ---------- */
+	try {
+		const html = await (await fresh('index.html')).text();
+		const m = html.match(/wedding-build" content="([\d.]+)"/);
+		if (m && m[1] === '2.2') {
+			row('g-version', 'ok', 'index.html trên đĩa là bản <b>v' + m[1] + '</b> — đúng bản mới nhất.');
+		} else if (m) {
+			row('g-version', 'bad', 'index.html trên đĩa là bản <b>v' + m[1] + '</b> (cũ).',
+				'Bạn chưa giải nén bản mới đè vào thư mục này, hoặc đang serve nhầm thư mục.');
+		} else {
+			row('g-version', 'bad', 'index.html <b>không có dấu phiên bản</b> — đây là bản rất cũ.',
+				'Khả năng cao zip mới bị giải nén <b>lồng vào trong</b> (kiểm tra có thư mục con ' +
+				'<code>wedding-website-v2</code> nằm bên trong thư mục hiện tại không).');
+		}
+	} catch (e) {
+		row('g-version', 'bad', 'Không đọc được index.html: ' + e.message);
+	}
+
+	try {
+		const js = await (await fresh('scripts/music-player.js')).text();
+		if (js.includes("no-store")) {
+			row('g-version', 'ok', 'scripts/music-player.js là bản mới (đã chống cache playlist).');
+		} else {
+			row('g-version', 'bad', 'scripts/music-player.js là <b>bản cũ</b>.',
+				'Giải nén lại zip v2.2 đè vào đúng thư mục này.');
+		}
+	} catch (e) {
+		row('g-version', 'bad', 'Thiếu scripts/music-player.js!');
+	}
+
+	/* ---------- 2. Nhạc ---------- */
+	try {
+		const res = await fresh('music/playlist.json');
+		if (!res.ok) throw new Error('HTTP ' + res.status);
+		const data = await res.json();
+		const tracks = (data.tracks || []).filter(Boolean);
+		if (!tracks.length) {
+			row('g-music', 'bad', 'playlist.json không có bài nào trong <code>tracks</code>.');
+		} else {
+			row('g-music', 'ok', 'Đọc được playlist.json — ' + tracks.length + ' bài.');
+			for (const t of tracks) {
+				const okFile = await exists('music/' + encodeURIComponent(t));
+				row('g-music', okFile ? 'ok' : 'bad',
+					(okFile ? 'Có file: ' : 'KHÔNG tìm thấy file: ') + '<code>' + t + '</code>',
+					okFile ? '' : 'Tên trong playlist phải khớp 100% với tên file thật ' +
+						'(khoảng trắng, hoa/thường, dấu, đuôi .mp3).');
+			}
+		}
+	} catch (e) {
+		row('g-music', 'bad', 'Không đọc được <code>music/playlist.json</code> (' + e.message + ').',
+			'Đây chính là lý do <b>icon nhạc không hiện</b> — player chỉ xuất hiện khi đọc được playlist. ' +
+			'Kiểm tra file có tồn tại trong thư mục đang serve và JSON không lỗi cú pháp.');
+	}
+
+	/* ---------- 3. Ảnh ---------- */
+	const imgs = [
+		['images/hero-bg.JPG', 'Ảnh nền hero'],
+		['images/groom.jpg', 'Ảnh chú rể'],
+		['images/bride.jpg', 'Ảnh cô dâu'],
+		['images/couple.jpg', 'Ảnh cặp đôi (câu chuyện)'],
+		['images/promesCenter.jpg', 'Ảnh Promes Center']
+	];
+	let missing = 0;
+	for (const [p, label] of imgs) {
+		const okImg = await exists(p);
+		if (!okImg) missing++;
+		row('g-images', okImg ? 'ok' : 'bad', label + ': <code>' + p + '</code>' + (okImg ? '' : ' — thiếu'));
+	}
+	if (missing === imgs.length) {
+		row('g-images', 'warn', 'Thiếu <b>toàn bộ</b> ảnh chính.',
+			'Zip nâng cấp KHÔNG kèm ảnh — hãy chép thư mục <code>images/</code> từ bản web cũ của bạn vào đây.');
+	}
+
+	/* ---------- 4. Cốt lõi ---------- */
+	for (const p of ['css/base.css', 'css/music-player.css', 'components/music-player.html',
+	                 'scripts/petals3d.js', 'language/vi.json']) {
+		row('g-core', (await exists(p)) ? 'ok' : 'bad', '<code>' + p + '</code>');
+	}
+
+	/* ---------- Kết luận ---------- */
+	const v = document.getElementById('verdict');
+	if (issues.length === 0) {
+		v.className = 'good';
+		v.innerHTML = '🎉 <b>Mọi thứ trên đĩa đều ổn!</b> Nếu trang chính vẫn hiển thị sai, đó là ' +
+			'<b>cache trình duyệt</b>: bấm nút dưới (mở kèm tham số phá cache), sau đó nhấn ' +
+			'<code>Ctrl + Shift + R</code> một lần. Mở Console (F12) phải thấy dòng ' +
+			'<code>💍 Wedding site v2.2</code>.' +
+			'<br><a class="btn" href="/?fresh=' + Date.now() + '">Mở trang chính (phá cache) →</a>';
+	} else {
+		v.className = 'issues';
+		v.innerHTML = '🔧 Phát hiện <b>' + issues.length + ' vấn đề</b> — sửa theo gợi ý ở từng dòng đỏ phía trên ' +
+			'(thường là: giải nén nhầm chỗ / thiếu thư mục images / tên bài hát không khớp). ' +
+			'Sửa xong tải lại trang chẩn đoán này để kiểm tra lại.';
+	}
+})();
+</script>
+</body>
+</html>

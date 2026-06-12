@@ -1,14 +1,42 @@
 /**
- * Base Styles
- * Core styles, variables, resets
+ * Base Styles — v2 "Sợi Chỉ Vàng" (The Golden Thread)
+ * Design tokens, resets, typography, shared ornaments
+ *
+ * Palette: champagne gold + deep plum ink + wine red + blush,
+ * a candlelit Vietnamese wedding feel.
+ * Type: Cormorant Garamond (display serif) · Dancing Script (names)
+ *       · Be Vietnam Pro (body — designed for Vietnamese diacritics)
  */
 
 :root {
-	--primary-color: #d4b08c;
-	--secondary-color: #f9f3f0;
-	--dark-color: #2c3e50;
-	--light-color: #ffffff;
-	--accent-color: #e74c3c;
+	/* ===== Color tokens ===== */
+	--ink: #2b2230;            /* deep plum charcoal — primary text */
+	--ink-soft: #5a4d63;       /* secondary text */
+	--gold: #c9a06c;           /* champagne gold — primary accent */
+	--gold-deep: #a87e4b;      /* hover / borders */
+	--gold-pale: #ecd9bd;      /* faint gold lines */
+	--wine: #8c3041;           /* deep wine red — hearts, rare accents */
+	--blush: #e8c4c4;          /* soft blush pink */
+	--ivory: #fbf7f1;          /* warm ivory background */
+	--paper: #ffffff;          /* cards */
+
+	/* Legacy aliases — older stylesheets still reference these */
+	--primary-color: var(--gold);
+	--secondary-color: var(--ivory);
+	--dark-color: var(--ink);
+	--light-color: var(--paper);
+	--accent-color: var(--wine);
+
+	/* ===== Type tokens ===== */
+	--font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+	--font-script: 'Dancing Script', cursive;
+	--font-body: 'Be Vietnam Pro', 'Montserrat', sans-serif;
+
+	/* ===== Effect tokens ===== */
+	--shadow-soft: 0 6px 24px rgba(43, 34, 48, 0.08);
+	--shadow-lift: 0 18px 45px rgba(43, 34, 48, 0.16);
+	--radius: 14px;
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -22,10 +50,22 @@ html {
 }
 
 body {
-	font-family: 'Montserrat', sans-serif;
-	color: var(--dark-color);
-	line-height: 1.6;
-	background-color: var(--secondary-color);
+	font-family: var(--font-body);
+	font-weight: 400;
+	color: var(--ink);
+	line-height: 1.7;
+	background-color: var(--ivory);
+	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
+}
+
+::selection {
+	background: var(--gold);
+	color: var(--paper);
+}
+
+img {
+	max-width: 100%;
 }
 
 .container {
@@ -34,48 +74,184 @@ body {
 	padding: 0 20px;
 }
 
-/* Section common styles */
+/* ===== Sections & headers ===== */
 section {
-	padding: 100px 0;
+	padding: 110px 0;
+	position: relative;
 }
 
 .section-header {
 	text-align: center;
-	margin-bottom: 60px;
+	margin-bottom: 64px;
 }
 
 .section-title {
-	font-family: 'Dancing Script', cursive;
-	font-size: 3rem;
-	color: var(--primary-color);
-	margin-bottom: 20px;
+	font-family: var(--font-script);
+	font-size: clamp(2.4rem, 5vw, 3.4rem);
+	font-weight: 600;
+	color: var(--gold-deep);
+	margin-bottom: 14px;
+	line-height: 1.15;
 }
 
 .section-subtitle {
-	font-size: 1.1rem;
+	font-size: 1.05rem;
+	color: var(--ink-soft);
 	max-width: 700px;
 	margin: 0 auto;
+	font-weight: 300;
 }
 
+/*
+ * The golden thread — signature divider.
+ * A hairline of gold with a diamond knot at its center,
+ * echoing "sợi chỉ duyên phận" that runs through the couple's story.
+ */
 .divider {
-	width: 100px;
-	height: 2px;
-	background-color: var(--primary-color);
-	margin: 20px auto;
+	width: 160px;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+	margin: 22px auto;
+	position: relative;
 }
 
+.divider::before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 7px;
+	height: 7px;
+	background: var(--gold);
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.divider::after {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 15px;
+	height: 15px;
+	border: 1px solid var(--gold-pale);
+	transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Smaller thread used under section titles */
+.section-header .section-title::after {
+	content: '';
+	display: block;
+	width: 90px;
+	height: 1px;
+	margin: 18px auto 0;
+	background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ===== Buttons ===== */
 .btn {
 	display: inline-block;
-	background-color: var(--primary-color);
-	color: var(--light-color);
-	padding: 12px 30px;
+	background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+	color: var(--paper);
+	padding: 14px 38px;
 	border-radius: 50px;
 	text-decoration: none;
 	font-weight: 600;
-	letter-spacing: 1px;
-	transition: background-color 0.3s ease;
+	font-size: 0.85rem;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	border: none;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+	box-shadow: 0 8px 20px rgba(168, 126, 75, 0.35);
+}
+
+.btn::after {
+	/* sweeping shine on hover */
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -80%;
+	width: 50%;
+	height: 100%;
+	background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+	transform: skewX(-20deg);
+	transition: left 0.6s var(--ease-out);
 }
 
 .btn:hover {
-	background-color: #c09b78;
+	transform: translateY(-3px);
+	box-shadow: 0 14px 30px rgba(168, 126, 75, 0.45);
+}
+
+.btn:hover::after {
+	left: 130%;
+}
+
+.btn:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 3px;
+}
+
+/* Secondary (outline) button */
+.btn-outline {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 24px;
+	border: 1px solid var(--gold);
+	border-radius: 50px;
+	color: var(--gold-deep);
+	background: transparent;
+	text-decoration: none;
+	font-weight: 500;
+	font-size: 0.82rem;
+	letter-spacing: 1px;
+	transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s var(--ease-out);
+}
+
+.btn-outline:hover {
+	background-color: var(--gold);
+	color: var(--paper);
+	transform: translateY(-2px);
+}
+
+.btn-outline:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 3px;
+}
+
+/* ===== Custom scrollbar (WebKit) ===== */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--ivory);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--gold-pale);
+	border-radius: 10px;
+	border: 2px solid var(--ivory);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--gold);
+}
+
+/* ===== Accessibility ===== */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
 }

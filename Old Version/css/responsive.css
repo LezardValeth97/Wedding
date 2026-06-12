@@ -1,0 +1,106 @@
+@media (max-width: 768px) {
+	.nav-container {
+		padding: 15px;
+	}
+	
+	.menu {
+		position: fixed;
+		top: 70px;
+		left: -100%;
+		width: 100%;
+		flex-direction: column;
+		background-color: var(--light-color);
+		padding: 20px 0;
+		box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+		transition: left 0.3s ease;
+	}
+	
+	.menu.active {
+		left: 0;
+	}
+	
+	.menu li {
+		margin: 10px 0;
+	}
+	
+	.hamburger {
+		display: block;
+	}
+	
+	.hero h1 {
+		font-size: 3rem;
+	}
+	
+	.hero p {
+		font-size: 1.2rem;
+	}
+	
+	.countdown-item {
+		width: 100px;
+	}
+	
+	.countdown-number {
+		font-size: 2.5rem;
+	}
+	
+	.section-title {
+		font-size: 2.5rem;
+	}
+	
+	.couple-content {
+		flex-direction: column;
+	}
+	
+	.couple-image {
+		width: 100%;
+	}
+	
+	.couple-intro-container {
+		gap: 40px;
+	}
+	
+	.person-image {
+		width: 180px;
+		height: 270px;
+	}
+	
+	.person-name {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero h1 {
+		font-size: 2.5rem;
+	}
+	
+	.hero p {
+		font-size: 1rem;
+	}
+	
+	.countdown-item {
+		width: 80px;
+	}
+	
+	.countdown-number {
+		font-size: 2rem;
+	}
+	
+	.section-title {
+		font-size: 2rem;
+	}
+	
+	.rsvp-form {
+		padding: 20px;
+	}
+	
+	.radio-group {
+		flex-direction: column;
+		gap: 10px;
+	}
+	
+	.person-image {
+		width: 160px;
+		height: 240px;
+	}
+}

@@ -14,7 +14,7 @@
 		},
 		"story": {
 			"title": "Our Love Story",
-			"subtitle": "How we met and fell in love" 
+			"subtitle": "How we met and fell in love"
 		},
 		"events": {
 			"title": "Wedding Events",
@@ -41,7 +41,10 @@
 			"days": "DAYS",
 			"hours": "HOURS",
 			"minutes": "MINUTES",
-			"seconds": "SECONDS"
+			"seconds": "SECONDS",
+			"titleMarried": "Happily Married For",
+			"years": "YEARS",
+			"months": "MONTHS"
 		}
 	},
 	"coupleIntro": {
@@ -66,7 +69,8 @@
 		"date": "May 8, 2025 | 10:30 AM",
 		"venue": "Trung Tâm Tiệc Cưới & Sự Kiện Promes Center",
 		"address": "122 - 124, Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội 10000",
-		"description": "Please join us for our wedding celebration at Promes Center. The morning will feature a traditional Vietnamese wedding ceremony, followed by a delightful lunch and joyful festivities. We look forward to sharing this special moment with you as we begin our new journey together."
+		"description": "Please join us for our wedding celebration at Promes Center. The morning will feature a traditional Vietnamese wedding ceremony, followed by a delightful lunch and joyful festivities. We look forward to sharing this special moment with you as we begin our new journey together.",
+		"directions": "Get Directions"
 	},
 	"rsvp": {
 		"guestType": {

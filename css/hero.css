@@ -1,125 +1,344 @@
 /**
- * Hero and Countdown Styles
- * Hero section and countdown timer
+ * Hero & Countdown — v2
+ * Cinematic hero with 3D petal canvas layer, orchestrated entrance,
+ * and a glass-card countdown that flips its digits.
  */
 
-/* Hero Section */
+/* ===== Hero ===== */
 .hero {
 	height: 100vh;
-	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../images/hero-bg.JPG') center/cover no-repeat;
+	min-height: 620px;
+	/* Gradient base ensures the hero looks intentional even before
+	   the photo loads (or if it's missing on a teaching setup). */
+	background:
+		linear-gradient(rgba(30, 22, 36, 0.45), rgba(30, 22, 36, 0.55)),
+		radial-gradient(120% 90% at 70% 20%, #6b4f63 0%, #3a2b42 55%, #241a2c 100%);
+	background-size: cover;
+	background-position: center;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
-	color: var(--light-color);
+	color: var(--paper);
 	position: relative;
+	overflow: hidden;
 }
 
 html.webp .hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../images/hero-bg.webp');
+	background-image:
+		linear-gradient(rgba(30, 22, 36, 0.35), rgba(30, 22, 36, 0.55)),
+		url('../images/hero-bg.webp');
+	animation: heroKenBurns 26s ease-in-out infinite alternate;
 }
 
 html.no-webp .hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../images/hero-bg.JPG');
+	background-image:
+		linear-gradient(rgba(30, 22, 36, 0.35), rgba(30, 22, 36, 0.55)),
+		url('../images/hero-bg.JPG');
+	animation: heroKenBurns 26s ease-in-out infinite alternate;
+}
+
+/* Slow, almost imperceptible breathing of the photo */
+@keyframes heroKenBurns {
+	from { background-size: 100% auto, 102% auto; }
+	to   { background-size: 100% auto, 110% auto; }
+}
+
+@media (max-width: 768px) {
+	html.webp .hero,
+	html.no-webp .hero {
+		/* background-size percentages misbehave on tall phones */
+		animation: none;
+		background-size: cover;
+	}
+}
+
+/* Layer for the Three.js petal canvas (filled by petals3d.js) */
+.hero-petals {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.hero-petals canvas {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+/* Soft vignette so text always stays readable */
+.hero-veil {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	background: radial-gradient(85% 70% at 50% 45%, transparent 55%, rgba(20, 14, 26, 0.55) 100%);
 }
 
 .hero-content {
-	max-width: 800px;
+	max-width: 840px;
 	padding: 0 20px;
 	position: relative;
 	z-index: 2;
-	margin-top: 180px;
+}
+
+/* Ornament above the names — small golden flourish */
+.hero-ornament {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	margin-bottom: 26px;
+	opacity: 0.9;
+}
+
+.hero-ornament::before,
+.hero-ornament::after {
+	content: '';
+	width: 70px;
+	height: 1px;
+	background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.hero-ornament::after {
+	background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.hero-ornament i {
+	color: var(--gold);
+	font-size: 0.85rem;
 }
 
 .hero h1 {
-	font-family: 'Dancing Script', cursive;
-	font-size: 4rem;
-	margin-bottom: 20px;
+	font-family: var(--font-script);
+	font-size: clamp(3rem, 8vw, 5.2rem);
+	font-weight: 700;
+	margin-bottom: 18px;
 	line-height: 1.2;
+	text-shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+}
+
+.hero .divider {
+	background: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
 }
 
 .hero p {
-	font-size: 1.5rem;
-	margin-bottom: 30px;
+	font-family: var(--font-display);
+	font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+	font-style: italic;
+	font-weight: 500;
+	margin-bottom: 26px;
+	letter-spacing: 0.5px;
 }
 
-.date {
-	font-size: 1.2rem;
-	letter-spacing: 3px;
-	margin-bottom: 40px;
+.hero .date {
+	font-family: var(--font-body);
+	font-style: normal;
+	font-size: 1rem;
+	font-weight: 500;
+	letter-spacing: 6px;
+	margin-bottom: 42px;
+	color: var(--gold-pale);
 }
 
-/* Countdown */
+/* Orchestrated entrance — each element arrives a beat after the last */
+.hero-content > * {
+	opacity: 0;
+	transform: translateY(26px);
+	animation: heroRise 1s var(--ease-out) forwards;
+}
+
+.hero-content > *:nth-child(1) { animation-delay: 0.15s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.35s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.6s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.8s; }
+.hero-content > *:nth-child(5) { animation-delay: 1s; }
+.hero-content > *:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes heroRise {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Scroll cue — a slow falling dot inside a ring */
+.hero-scroll {
+	position: absolute;
+	bottom: 34px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+	width: 28px;
+	height: 46px;
+	border: 1.5px solid rgba(255, 255, 255, 0.6);
+	border-radius: 18px;
+	opacity: 0;
+	animation: heroRise 1s var(--ease-out) 1.6s forwards;
+}
+
+.hero-scroll::before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 9px;
+	width: 4px;
+	height: 4px;
+	margin-left: -2px;
+	border-radius: 50%;
+	background: var(--gold);
+	animation: scrollDot 2s ease-in-out infinite;
+}
+
+@keyframes scrollDot {
+	0%   { transform: translateY(0); opacity: 1; }
+	70%  { transform: translateY(16px); opacity: 0; }
+	100% { transform: translateY(0); opacity: 0; }
+}
+
+/* ===== Countdown ===== */
 .countdown {
-	background-color: var(--light-color);
-	padding: 80px 0;
+	background:
+		radial-gradient(60% 120% at 15% 0%, rgba(232, 196, 196, 0.25) 0%, transparent 60%),
+		radial-gradient(50% 100% at 90% 100%, rgba(201, 160, 108, 0.18) 0%, transparent 60%),
+		var(--paper);
+	padding: 90px 0;
 	text-align: center;
 }
 
 .countdown h2 {
-	font-size: 2.5rem;
-	margin-bottom: 40px;
-	font-family: 'Dancing Script', cursive;
-	color: var(--primary-color);
+	font-size: clamp(2rem, 4.5vw, 2.8rem);
+	margin-bottom: 12px;
+	font-family: var(--font-script);
+	font-weight: 600;
+	color: var(--gold-deep);
+}
+
+/* Small heart that appears once the couple is married */
+.countdown-heart {
+	display: none;
+	color: var(--wine);
+	font-size: 1.1rem;
+	margin-bottom: 30px;
+	animation: heartBeat 1.8s ease-in-out infinite;
+}
+
+.countdown.is-married .countdown-heart {
+	display: block;
+}
+
+@keyframes heartBeat {
+	0%, 100% { transform: scale(1); }
+	12%      { transform: scale(1.22); }
+	24%      { transform: scale(1); }
+	36%      { transform: scale(1.16); }
+	48%      { transform: scale(1); }
 }
 
 .countdown-timer {
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap: 30px;
+	gap: 22px;
+	margin-top: 36px;
+	perspective: 800px; /* lets the digit flip read as 3D */
 }
 
 .countdown-item {
-	width: 120px;
+	width: 130px;
+	padding: 26px 10px 20px;
+	background: rgba(255, 255, 255, 0.75);
+	border: 1px solid var(--gold-pale);
+	border-radius: var(--radius);
+	box-shadow: var(--shadow-soft);
+	backdrop-filter: blur(6px);
+	position: relative;
+	transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+.countdown-item:hover {
+	transform: translateY(-6px);
+	box-shadow: var(--shadow-lift);
+}
+
+/* Golden thread knot on top of each card */
+.countdown-item::before {
+	content: '';
+	position: absolute;
+	top: -5px;
+	left: 50%;
+	width: 9px;
+	height: 9px;
+	background: var(--gold);
+	transform: translateX(-50%) rotate(45deg);
 }
 
 .countdown-number {
-	font-size: 3rem;
-	font-weight: 700;
-	color: var(--dark-color);
-	margin-bottom: 10px;
+	font-family: var(--font-display);
+	font-size: 3.2rem;
+	font-weight: 600;
+	color: var(--ink);
+	line-height: 1.1;
+	margin-bottom: 8px;
+	font-variant-numeric: tabular-nums;
+	display: inline-block;
+	transform-style: preserve-3d;
+}
+
+/* Flip applied by countdown.js whenever a value changes */
+.countdown-number.flip {
+	animation: digitFlip 0.55s var(--ease-out);
+}
+
+@keyframes digitFlip {
+	0%   { transform: rotateX(0); }
+	45%  { transform: rotateX(-92deg); opacity: 0.4; }
+	55%  { transform: rotateX(92deg); opacity: 0.4; }
+	100% { transform: rotateX(0); opacity: 1; }
 }
 
 .countdown-text {
-	font-size: 0.9rem;
+	font-size: 0.72rem;
+	font-weight: 600;
 	text-transform: uppercase;
-	letter-spacing: 2px;
+	letter-spacing: 2.5px;
+	color: var(--gold-deep);
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
-	.hero h1 {
-		font-size: 3rem;
+	.countdown-timer {
+		gap: 14px;
 	}
-	
-	.hero p {
-		font-size: 1.2rem;
-	}
-	
+
 	.countdown-item {
-		width: 100px;
+		width: calc(33.33% - 14px);
+		min-width: 96px;
+		padding: 20px 6px 16px;
 	}
-	
+
 	.countdown-number {
-		font-size: 2.5rem;
+		font-size: 2.4rem;
 	}
 }
 
 @media (max-width: 480px) {
-	.hero h1 {
-		font-size: 2.5rem;
+	.hero .date {
+		letter-spacing: 4px;
 	}
-	
-	.hero p {
-		font-size: 1rem;
-	}
-	
+
 	.countdown-item {
-		width: 80px;
+		width: calc(33.33% - 10px);
+		min-width: 90px;
 	}
-	
+
 	.countdown-number {
 		font-size: 2rem;
+	}
+
+	.countdown-text {
+		font-size: 0.6rem;
+		letter-spacing: 1.5px;
 	}
 }

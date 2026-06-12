@@ -1,0 +1,18 @@
+<!-- Floating Music Player (logic in scripts/music-player.js) -->
+<div class="music-player hidden" id="music-player">
+	<button class="music-disc" id="music-disc" type="button" aria-label="Play music" title="Music">
+		<i class="fas fa-music" id="music-disc-icon"></i>
+	</button>
+
+	<div class="music-panel" id="music-panel">
+		<span class="music-track-name" id="music-track-name">…</span>
+		<button class="music-btn" id="music-toggle" type="button" aria-label="Play / Pause">
+			<i class="fas fa-play" id="music-toggle-icon"></i>
+		</button>
+		<button class="music-btn" id="music-next" type="button" aria-label="Next song">
+			<i class="fas fa-forward-step"></i>
+		</button>
+	</div>
+
+	<audio id="music-audio" preload="none"></audio>
+</div>

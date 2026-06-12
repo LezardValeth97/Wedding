@@ -1,43 +1,56 @@
 <!-- Hero Section -->
 <section id="home" class="hero">
+	<!-- Layer for the Three.js falling petals (filled by petals3d.js) -->
+	<div class="hero-petals" id="hero-petals"></div>
+	<!-- Soft vignette to keep text readable over the photo -->
+	<div class="hero-veil"></div>
+
 	<div class="hero-content">
-		<h1>Quốc Việt & Thanh Thủy</h1>
+		<!-- NOTE: keep this an ornament <div>, not a <p> —
+		     i18n.js targets the FIRST <p> as the hero message. -->
+		<div class="hero-ornament"><i class="fas fa-heart"></i></div>
+		<h1>Quốc Việt &amp; Thanh Thủy</h1>
 		<div class="divider"></div>
 		<p>We're getting married!</p>
 		<p class="date">MAY 8, 2025</p>
 		<a href="#rsvp-content" class="btn">RSVP</a>
 	</div>
+
+	<a href="#countdown" class="hero-scroll" aria-label="Scroll down"></a>
 </section>
 
 <!-- Countdown Section -->
-<section class="countdown">
+<section class="countdown" id="countdown">
 	<div class="container">
-	    <h2>Counting Down to Our Big Day</h2>
-	    <div class="countdown-timer" id="countdown">
-		    <div class="countdown-item">
-		        <div class="countdown-number" id="years">00</div>
-		        <div class="countdown-text">YEARS</div>
-		    </div>
-	    	<div class="countdown-item">
-	        	<div class="countdown-number" id="months">00</div>
-	        	<div class="countdown-text">MONTHS</div>
-	    	</div>
-	      	<div class="countdown-item">
-	        	<div class="countdown-number" id="days">00</div>
-	        	<div class="countdown-text">DAYS</div>
-	      	</div>
-	      	<div class="countdown-item">
-	        	<div class="countdown-number" id="hours">00</div>
-	        	<div class="countdown-text">HOURS</div>
-	      	</div>
-	      	<div class="countdown-item">
-	        	<div class="countdown-number" id="minutes">00</div>
-	        	<div class="countdown-text">MINUTES</div>
-	      	</div>
-	      	<div class="countdown-item">
-	        	<div class="countdown-number" id="seconds">00</div>
-	        	<div class="countdown-text">SECONDS</div>
-	      	</div>
-	    </div>
+		<h2>Counting Down to Our Big Day</h2>
+		<!-- Beats while the couple is married (toggled by countdown.js) -->
+		<div class="countdown-heart"><i class="fas fa-heart"></i></div>
+
+		<div class="countdown-timer" id="countdown-timer">
+			<div class="countdown-item" data-reveal style="--reveal-delay: 0s">
+				<div class="countdown-number" id="years">00</div>
+				<div class="countdown-text">YEARS</div>
+			</div>
+			<div class="countdown-item" data-reveal style="--reveal-delay: 0.08s">
+				<div class="countdown-number" id="months">00</div>
+				<div class="countdown-text">MONTHS</div>
+			</div>
+			<div class="countdown-item" data-reveal style="--reveal-delay: 0.16s">
+				<div class="countdown-number" id="days">00</div>
+				<div class="countdown-text">DAYS</div>
+			</div>
+			<div class="countdown-item" data-reveal style="--reveal-delay: 0.24s">
+				<div class="countdown-number" id="hours">00</div>
+				<div class="countdown-text">HOURS</div>
+			</div>
+			<div class="countdown-item" data-reveal style="--reveal-delay: 0.32s">
+				<div class="countdown-number" id="minutes">00</div>
+				<div class="countdown-text">MINUTES</div>
+			</div>
+			<div class="countdown-item" data-reveal style="--reveal-delay: 0.4s">
+				<div class="countdown-number" id="seconds">00</div>
+				<div class="countdown-text">SECONDS</div>
+			</div>
+		</div>
 	</div>
 </section>

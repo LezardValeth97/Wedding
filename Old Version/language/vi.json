@@ -1,0 +1,106 @@
+{
+	"nav": {
+		"home": "TRANG CHỦ",
+		"couple": "CẶP ĐÔI",
+		"story": "CÂU CHUYỆN",
+		"events": "SỰ KIỆN",
+		"gallery": "ALBUM",
+		"rsvp": "PHẢN HỒI"
+	},
+	"sections": {
+		"couple": {
+			"title": "Cặp Đôi",
+			"subtitle": "Chúng mình rất vui được chia sẻ ngày đặc biệt này cùng bạn"
+		},
+		"story": {
+			"title": "Câu Chuyện Tình Yêu",
+			"subtitle": "Cách chúng mình gặp và yêu nhau"
+		},
+		"events": {
+			"title": "Sự Kiện Cưới",
+			"subtitle": "Hãy tham gia cùng chúng mình trong ngày đặc biệt này"
+		},
+		"gallery": {
+			"title": "Thư Viện Ảnh",
+			"subtitle": "Những khoảnh khắc đáng nhớ của chúng mình"
+		},
+		"rsvp": {
+			"title": "Phản Hồi Tham Dự",
+			"subtitle": "Vui lòng phản hồi giúp vợ chồng chúng mình biết nếu bạn sẽ đến tham dự vào ngày 8 tháng 5 năm 2025, để chúng mình có thể thuận tiện sắp xếp chỗ ngồi ạ. ( •̀ ω •́ )✧"
+		}
+	},
+	"home": {
+		"hero": {
+			"title": "Quốc Việt & Thanh Thủy",
+			"message": "Chúng mình sắp kết hôn!",
+			"date": "08 THÁNG 5, 2025",
+			"rsvp_button": "Phản Hồi"
+		},
+		"countdown": {
+			"title": "Đếm Ngược Đến Ngày Trọng Đại",
+			"days": "NGÀY",
+			"hours": "GIỜ",
+			"minutes": "PHÚT",
+			"seconds": "GIÂY"
+		}
+	},
+	"coupleIntro": {
+		"groom": {
+			"title": "Chú Rể",
+			"description": "Quốc Việt, ôm mộng giảng dạy cao cả, hiên ngang bước vào lớp học—mà không hề biết mình vừa ký hợp đồng trọn đời với chấm bài và deadline. Rồi xuất hiện Thanh Thủy, \"phù thủy\" phòng nhân sự, người vô tình đưa ra quyết định sai lầm nhất cuộc đời: tuyển dụng anh ta. Đúng là số phận đôi khi có khiếu hài hước rất oái oăm."
+		},
+		"bride": {
+			"title": "Cô Dâu",
+			"description": "Thanh Thủy, với niềm đam mê văn chương và khả năng \"nhìn xa trông rộng\" (hoặc ít nhất là nghĩ vậy), dấn thân vào thế giới nhân sự. Cuộc đời cô rẽ sang một hướng không ngờ tới khi tuyển dụng Quốc Việt—tưởng rằng tìm được một nhân viên chăm chỉ, ai ngờ lại vô tình đăng ký gói dài hạn nghe giảng miễn phí suốt đời."
+		}
+	},
+	"couple": {
+		"heading": "Khi Chúng Mình Gặp Nhau",
+		"paragraph1": "Chúng tôi lần đầu chạm mặt vào tháng 3 năm 2022, không phải trong một buổi gặp gỡ lãng mạn ở trường đại học, mà qua một email tuyển dụng bị ngó lơ. Quốc Việt, với bản tính \"não cá vàng\" của mình, hoàn toàn bỏ qua thư mời phỏng vấn của Thanh Thủy, để lại trong cô ấn tượng đầu tiên tệ nhất có thể. Vài tháng sau, vào tháng 7, số phận sắp đặt để Quốc Việt chính thức trở thành giảng viên tại USTH. Chính lúc xuống phòng nhân sự nộp giấy tờ, anh chàng mới có cú \"tiếng sét ái tình\"—chỉ tiếc là không có nhiều cơ hội để nói chuyện với cô nàng.",
+		"paragraph2": "Mọi thứ thay đổi vào tháng 12 năm 2023 trong chuyến team-building, khi khoảnh khắc Thanh Thủy bị kéo ra khỏi Quốc Việt vô tình được ghi lại, mở ra một chuỗi sự kiện bất ngờ. Hai người bắt đầu trò chuyện nhiều hơn, và vào một đêm mưa tháng 1 năm 2024, sau màn tỏ tình lúng túng đến mức… Thủy không nghe thấy gì, Quốc Việt quyết tâm quay lại, kéo Thủy ra công viên Nghĩa Đô để nói rõ ràng một lần nữa. Và chính đêm đó, câu chuyện của họ thực sự bắt đầu.",
+		"paragraph3": "Giờ đây, chúng tôi háo hức bước vào một chương mới của cuộc đời, bên cạnh gia đình và những người bạn thân yêu nhất. Không thể chờ đợi thêm để cùng mọi người chung vui trong ngày đặc biệt này!",
+		"photoCaption": "Khoảnh khắc được ghi lại trong chuyến Team Building Flamingo vào ngày 9 tháng 12 năm 2023."
+	},
+	"event": {
+		"title": "Lễ Thành Hôn",
+		"date": "Ngày 8 tháng 5, 2025 | 10:30 Sáng",
+		"venue": "Trung Tâm Tiệc Cưới & Sự Kiện Promes Center",
+		"address": "122 - 124, Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội 10000",
+		"description": "Trân trọng kính mời quý vị đến tham dự lễ thành hôn của chúng tôi tại Promes Center. Buổi lễ sẽ diễn ra theo nghi thức truyền thống Việt Nam, sau đó là tiệc trưa và các hoạt động vui chơi. Chúng tôi rất mong được chia sẻ khoảnh khắc đặc biệt này cùng quý vị khi chúng tôi bắt đầu hành trình mới cùng nhau."
+	},
+	"rsvp": {
+		"guestType": {
+			"bride": "Khách Của Cô Dâu",
+			"groom": "Khách Của Chú Rể"
+		},
+		"form": {
+			"fullName": "Họ và Tên",
+			"attending": "Bạn sẽ tham dự chứ?",
+			"yes": {
+				"emoji": "(´▽`ʃ♡ƪ)",
+				"text": "Có!",
+				"subtext": "Sẽ Tham Dự"
+			},
+			"no": {
+				"emoji": "ಥ_ಥ",
+				"text": "Không!",
+				"subtext": "Tiếc Không Tham Dự Được"
+			},
+			"guestCount": "Số Người Tham Dự",
+			"guestOptions": {
+				"justMe": "Chỉ Mình Tôi",
+				"plusOne": "Tôi + 1 Người",
+				"plusTwo": "Tôi + 2 Người",
+				"plusThree": "Tôi + 3 Người",
+				"plusFour": "Tôi + 4 Người"
+			},
+			"message": "Lời Nhắn Gửi Đến Cặp Đôi",
+			"submit": "Gửi Phản Hồi",
+			"sending": "Đang Gửi...",
+			"sent": "Đã Gửi!",
+			"successAttending": "Cảm ơn phản hồi của bạn! Chúng mình rất mong được gặp bạn trong ngày đặc biệt này.",
+			"successDeclined": "Cảm ơn đã thông báo. Thật tiếc khi không thể gặp bạn trong ngày đặc biệt này!"
+		}
+	}
+}
+

@@ -39,7 +39,7 @@ const I18n = (function() {
 	async function loadLanguage(lang) {
 		console.log(`Attempting to load ${lang} translations...`);
 		try {
-			const response = await fetch(`./language/${lang}.json`);
+			const response = await fetch(`./language/${lang}.json`, { cache: 'no-cache' }); // v2.2: luôn revalidate
 			if (!response.ok) {
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
@@ -196,12 +196,25 @@ const I18n = (function() {
 		const countdown = document.querySelector('.countdown');
 		if (countdown && t.home && t.home.countdown) {
 			const countdownTitle = countdown.querySelector('h2');
+			const yearsEl = countdown.querySelector('#years');
+			const monthsEl = countdown.querySelector('#months');
+			const yearsText = yearsEl ? yearsEl.nextElementSibling : null;
+			const monthsText = monthsEl ? monthsEl.nextElementSibling : null;
 			const daysText = countdown.querySelector('#days').nextElementSibling;
 			const hoursText = countdown.querySelector('#hours').nextElementSibling;
 			const minutesText = countdown.querySelector('#minutes').nextElementSibling;
 			const secondsText = countdown.querySelector('#seconds').nextElementSibling;
 			
-			if (countdownTitle) countdownTitle.textContent = t.home.countdown.title;
+			// v2: after the wedding the section carries .is-married
+			// (set by countdown.js) and uses the "married for" title
+			if (countdownTitle) {
+				const married = countdown.classList.contains('is-married');
+				countdownTitle.textContent = (married && t.home.countdown.titleMarried)
+					? t.home.countdown.titleMarried
+					: t.home.countdown.title;
+			}
+			if (yearsText && t.home.countdown.years) yearsText.textContent = t.home.countdown.years;
+			if (monthsText && t.home.countdown.months) monthsText.textContent = t.home.countdown.months;
 			if (daysText) daysText.textContent = t.home.countdown.days;
 			if (hoursText) hoursText.textContent = t.home.countdown.hours;
 			if (minutesText) minutesText.textContent = t.home.countdown.minutes;
@@ -300,6 +313,12 @@ const I18n = (function() {
 		const eventDescription = eventSection.querySelector('.event-description');
 		if (eventDescription) {
 			eventDescription.textContent = t.event.description;
+		}
+		
+		// v2: directions button label
+		const directionsText = eventSection.querySelector('.event-directions-text');
+		if (directionsText && t.event.directions) {
+			directionsText.textContent = t.event.directions;
 		}
 	}
 

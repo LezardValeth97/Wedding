@@ -1,10 +1,13 @@
 /**
- * Events Styles
- * Styles for the wedding events section
+ * Events — v2
+ * A single elegant invitation card: framed photo,
+ * golden-iconed details, and a directions action.
  */
 
 .events {
-	background-color: var(--light-color);
+	background:
+		radial-gradient(55% 90% at 0% 100%, rgba(201, 160, 108, 0.12) 0%, transparent 60%),
+		var(--ivory);
 }
 
 .events-container {
@@ -17,56 +20,108 @@
 .event-card {
 	flex: 1;
 	min-width: 300px;
-	max-width: 500px;
-	background-color: var(--secondary-color);
-	border-radius: 10px;
+	max-width: 560px;
+	background-color: var(--paper);
+	border: 1px solid rgba(201, 160, 108, 0.25);
+	border-radius: var(--radius);
 	overflow: hidden;
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-	transition: transform 0.3s ease;
+	box-shadow: var(--shadow-soft);
+	transition: box-shadow 0.4s var(--ease-out);
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .event-card:hover {
-	transform: translateY(-5px);
+	box-shadow: var(--shadow-lift);
 }
 
-.event-image-container {
-	padding: 20px 20px 0 20px;
-	background-color: var(--secondary-color);
+/* Golden thread along the top edge of the invitation */
+.event-card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: linear-gradient(90deg, var(--gold), var(--wine), var(--gold));
+	z-index: 1;
+}
+
+.event-image {
+	overflow: hidden;
 }
 
 .event-img {
 	width: 100%;
-	border-radius: 8px;
-	max-height: 250px;
+	max-height: 270px;
 	object-fit: cover;
+	display: block;
+	transition: transform 0.7s var(--ease-out);
+}
+
+.event-card:hover .event-img {
+	transform: scale(1.05);
 }
 
 .event-details {
-	padding: 30px;
+	padding: 34px 36px 36px;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 }
 
 .event-title {
-	font-size: 1.8rem;
-	margin-bottom: 15px;
-	font-family: 'Dancing Script', cursive;
-	color: var(--primary-color);
+	font-size: 2rem;
+	margin-bottom: 20px;
+	font-family: var(--font-script);
+	font-weight: 600;
+	color: var(--gold-deep);
 }
 
 .event-info {
 	display: flex;
-	align-items: center;
-	margin-bottom: 15px;
+	align-items: flex-start;
+	margin-bottom: 14px;
+	font-size: 0.95rem;
+	color: var(--ink-soft);
 }
 
 .event-info i {
-	color: var(--primary-color);
-	margin-right: 10px;
+	color: var(--gold-deep);
+	margin-right: 14px;
+	margin-top: 5px;
+	width: 16px;
+	text-align: center;
+	flex-shrink: 0;
 }
 
 .event-description {
-	margin-top: 20px;
-	line-height: 1.8;
+	margin-top: 18px;
+	line-height: 1.85;
 	text-align: justify;
+	color: var(--ink-soft);
+	font-weight: 300;
+	font-size: 0.95rem;
+}
+
+/* Actions row (added after the description so the
+   .event-info:nth-child() selectors in i18n.js stay valid) */
+.event-actions {
+	margin-top: 26px;
+	padding-top: 22px;
+	border-top: 1px solid var(--gold-pale);
+	display: flex;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+	.event-details {
+		padding: 26px 22px 28px;
+	}
+
+	.event-actions {
+		justify-content: center;
+	}
 }

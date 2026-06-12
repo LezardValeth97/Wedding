@@ -41,7 +41,10 @@
 			"days": "NGÀY",
 			"hours": "GIỜ",
 			"minutes": "PHÚT",
-			"seconds": "GIÂY"
+			"seconds": "GIÂY",
+			"titleMarried": "Đã Về Chung Một Nhà Được",
+			"years": "NĂM",
+			"months": "THÁNG"
 		}
 	},
 	"coupleIntro": {
@@ -66,7 +69,8 @@
 		"date": "Ngày 8 tháng 5, 2025 | 10:30 Sáng",
 		"venue": "Trung Tâm Tiệc Cưới & Sự Kiện Promes Center",
 		"address": "122 - 124, Đ. Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà Nội 10000",
-		"description": "Trân trọng kính mời quý vị đến tham dự lễ thành hôn của chúng tôi tại Promes Center. Buổi lễ sẽ diễn ra theo nghi thức truyền thống Việt Nam, sau đó là tiệc trưa và các hoạt động vui chơi. Chúng tôi rất mong được chia sẻ khoảnh khắc đặc biệt này cùng quý vị khi chúng tôi bắt đầu hành trình mới cùng nhau."
+		"description": "Trân trọng kính mời quý vị đến tham dự lễ thành hôn của chúng tôi tại Promes Center. Buổi lễ sẽ diễn ra theo nghi thức truyền thống Việt Nam, sau đó là tiệc trưa và các hoạt động vui chơi. Chúng tôi rất mong được chia sẻ khoảnh khắc đặc biệt này cùng quý vị khi chúng tôi bắt đầu hành trình mới cùng nhau.",
+		"directions": "Chỉ Đường"
 	},
 	"rsvp": {
 		"guestType": {
@@ -103,4 +107,3 @@
 		}
 	}
 }
-

@@ -1,0 +1,169 @@
+/**
+ * Effects — v2 (NEW FILE)
+ * Shared motion layer: scroll reveals, 3D tilt support,
+ * back-to-top button, additive gallery polish.
+ *
+ * Teaching note: everything here degrades gracefully — without
+ * JavaScript, [data-reveal] elements stay fully visible thanks to
+ * the .js-reveal gate class added by reveal.js.
+ */
+
+/* ===== Scroll reveal =====
+   reveal.js adds .js-reveal to <body>, then .revealed to each
+   [data-reveal] element when it enters the viewport. */
+.js-reveal [data-reveal] {
+	opacity: 0;
+	transform: translateY(34px);
+	transition:
+		opacity 0.8s var(--ease-out),
+		transform 0.8s var(--ease-out);
+	transition-delay: var(--reveal-delay, 0s);
+	will-change: opacity, transform;
+}
+
+.js-reveal [data-reveal='left'] {
+	transform: translateX(-40px);
+}
+
+.js-reveal [data-reveal='right'] {
+	transform: translateX(40px);
+}
+
+.js-reveal [data-reveal='zoom'] {
+	transform: scale(0.92);
+}
+
+.js-reveal [data-reveal].revealed {
+	opacity: 1;
+	transform: none;
+}
+
+/* ===== 3D tilt (driven by tilt3d.js) ===== */
+.tilt-3d {
+	transform-style: preserve-3d;
+	transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+	transition: transform 0.25s ease-out;
+}
+
+.tilt-3d.is-tilting {
+	transition: transform 0.06s linear;
+}
+
+/* moving glare that follows the cursor */
+.tilt-3d .tilt-glare {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	pointer-events: none;
+	background: radial-gradient(
+		420px circle at var(--glare-x, 50%) var(--glare-y, 50%),
+		rgba(255, 255, 255, 0.28),
+		transparent 45%
+	);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	z-index: 3;
+}
+
+.tilt-3d.is-tilting .tilt-glare {
+	opacity: 1;
+}
+
+/* children float slightly above the card plane */
+.tilt-3d .person-image,
+.tilt-3d .person-name {
+	transform: translateZ(28px);
+}
+
+/* ===== Back to top ===== */
+.back-to-top {
+	position: fixed;
+	bottom: 28px;
+	left: 28px;
+	width: 46px;
+	height: 46px;
+	border: 1px solid var(--gold);
+	border-radius: 50%;
+	background: rgba(251, 247, 241, 0.9);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	color: var(--gold-deep);
+	font-size: 0.9rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 950;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(14px);
+	transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s var(--ease-out),
+		background-color 0.3s ease, color 0.3s ease;
+	box-shadow: var(--shadow-soft);
+}
+
+.back-to-top.visible {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.back-to-top:hover {
+	background: var(--gold);
+	color: var(--paper);
+	transform: translateY(-3px);
+}
+
+.back-to-top:focus-visible {
+	outline: 2px solid var(--ink);
+	outline-offset: 3px;
+}
+
+/* ===== Gallery polish (additive — gallery.css untouched) ===== */
+.gallery-item {
+	border-radius: 10px;
+	overflow: hidden;
+	transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+}
+
+.gallery-item:hover {
+	transform: translateY(-6px);
+	box-shadow: var(--shadow-lift);
+}
+
+.gallery-tab {
+	transition: transform 0.3s var(--ease-out), background-color 0.3s ease, color 0.3s ease;
+}
+
+.gallery-tab:hover {
+	transform: translateY(-2px);
+}
+
+/* ===== Missing image fallback (v2.2) =====
+   core.js gắn .img-missing khi <img> không tải được —
+   thay icon vỡ mặc định bằng khung ngà dịu mắt. */
+img.img-missing {
+	background:
+		repeating-linear-gradient(45deg, rgba(201, 160, 108, 0.07) 0 12px, transparent 12px 24px),
+		var(--ivory);
+	border: 1px dashed var(--gold-pale);
+	min-height: 120px;
+	object-fit: contain;
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+	.js-reveal [data-reveal] {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+
+	.tilt-3d {
+		transform: none !important;
+	}
+
+	.tilt-3d .tilt-glare {
+		display: none;
+	}
+}

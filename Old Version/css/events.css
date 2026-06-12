@@ -1,0 +1,72 @@
+/**
+ * Events Styles
+ * Styles for the wedding events section
+ */
+
+.events {
+	background-color: var(--light-color);
+}
+
+.events-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 40px;
+}
+
+.event-card {
+	flex: 1;
+	min-width: 300px;
+	max-width: 500px;
+	background-color: var(--secondary-color);
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease;
+	display: flex;
+	flex-direction: column;
+}
+
+.event-card:hover {
+	transform: translateY(-5px);
+}
+
+.event-image-container {
+	padding: 20px 20px 0 20px;
+	background-color: var(--secondary-color);
+}
+
+.event-img {
+	width: 100%;
+	border-radius: 8px;
+	max-height: 250px;
+	object-fit: cover;
+}
+
+.event-details {
+	padding: 30px;
+}
+
+.event-title {
+	font-size: 1.8rem;
+	margin-bottom: 15px;
+	font-family: 'Dancing Script', cursive;
+	color: var(--primary-color);
+}
+
+.event-info {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+
+.event-info i {
+	color: var(--primary-color);
+	margin-right: 10px;
+}
+
+.event-description {
+	margin-top: 20px;
+	line-height: 1.8;
+	text-align: justify;
+}

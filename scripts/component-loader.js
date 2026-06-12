@@ -3,6 +3,10 @@
  * This script handles loading HTML components into the main index.html file
  */
 $(document).ready(function() {
+    // Dev-friendly: jQuery tự gắn ?_=<timestamp> vào mọi request AJAX,
+    // nên components/*.html không bao giờ bị dính cache cũ của trình duyệt.
+    $.ajaxSetup({ cache: false });
+
     // Components to load and their target containers
     const components = [
         { path: 'components/navbar.html', target: '#navbar-content' },
@@ -12,7 +16,8 @@ $(document).ready(function() {
         { path: 'components/events.html', target: '#events-content' },
         { path: 'components/gallery.html', target: '#gallery-content' },
         { path: 'components/rsvp.html', target: '#rsvp-content' },
-        { path: 'components/footer.html', target: '#footer-content' }
+        { path: 'components/footer.html', target: '#footer-content' },
+        { path: 'components/music-player.html', target: '#music-player-content' } // v2
     ];
 
     // Counter to track loaded components

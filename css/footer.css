@@ -1,28 +1,77 @@
 /**
- * Footer Styles
- * Styles for the footer section
+ * Footer — v2
+ * Quiet plum-ink close with the couple's monogram and a golden thread.
  */
 
 footer {
-	background-color: var(--dark-color);
-	color: var(--light-color);
+	background:
+		radial-gradient(80% 120% at 50% 0%, rgba(201, 160, 108, 0.12) 0%, transparent 60%),
+		var(--ink);
+	color: rgba(251, 247, 241, 0.85);
+	padding: 70px 0 36px;
 	text-align: center;
-	padding: 40px 0;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Golden thread across the top */
+footer::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: min(520px, 80%);
+	height: 1px;
+	background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 
 .footer-logo {
-	font-family: 'Dancing Script', cursive;
-	font-size: 2rem;
-	color: var(--primary-color);
-	margin-bottom: 20px;
+	font-family: var(--font-script);
+	font-size: 2.3rem;
+	font-weight: 600;
+	color: var(--gold);
+	margin-bottom: 14px;
+}
+
+.footer-hearts {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	margin-bottom: 18px;
+	color: var(--gold-pale);
+	font-size: 0.7rem;
+}
+
+.footer-hearts::before,
+.footer-hearts::after {
+	content: '';
+	width: 50px;
+	height: 1px;
+	background: rgba(236, 217, 189, 0.35);
+}
+
+.footer-hearts i {
+	color: var(--wine);
+	font-size: 0.85rem;
 }
 
 .footer-text {
-	margin-bottom: 20px;
+	font-size: 0.95rem;
+	font-weight: 300;
+	margin-bottom: 26px;
+	color: rgba(251, 247, 241, 0.75);
 }
 
 .copyright {
-	font-size: 0.9rem;
-	opacity: 0.7;
-	margin-top: 20px;
+	font-size: 0.78rem;
+	font-weight: 300;
+	color: rgba(251, 247, 241, 0.45);
+	letter-spacing: 0.5px;
+}
+
+.copyright .fa-heart {
+	color: var(--wine);
+	margin: 0 3px;
 }

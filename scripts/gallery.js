@@ -16,7 +16,7 @@ const Gallery = (function() {
 		batchDelay: 300,     // Delay between batches in ms
 		preloadThreshold: 3, // Start preloading next tab when current tab has this many images loaded
 		rootMargin: '200px', // Start loading when within this margin
-		placeholderSrc: '/api/placeholder/400/300' // Default placeholder
+		placeholderSrc: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23f3ece2'/%3E%3C/svg%3E" // Default placeholder
 	};
 
 	let isInitialized = false;

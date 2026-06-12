@@ -1,11 +1,19 @@
 /**
- * Countdown Component
+ * Countdown Component — v2
  * Handles the wedding countdown timer
  * Displays: Years, Months, Days, Hours, Minutes, Seconds
- * Continues counting with negative numbers after wedding date
  * Uses calendar-based calculation for accurate date differences
+ *
+ * v2 changes (presentation only — the calculation is untouched):
+ *  - After the wedding day, instead of negative numbers the section
+ *    switches to "married mode": the title becomes "Happily married
+ *    for…" and the numbers count UP. (Same math, friendlier story.)
+ *  - Numbers are zero-padded (07 instead of 7) for steady layout.
+ *  - A digit gets a 3D flip animation whenever its value changes.
  */
 const Countdown = (function() {
+    let wasPast = null; // tracks mode changes so we only update the title when needed
+
     function init() {
         const yearsElement = document.getElementById('years');
         const monthsElement = document.getElementById('months');
@@ -85,15 +93,20 @@ const Countdown = (function() {
                     }
                 }
                 
-                // Format with negative sign if wedding date has passed
-                const prefix = isPast ? '-' : '';
-                
-                yearsElement.innerHTML = prefix + years.toString();
-                monthsElement.innerHTML = prefix + months.toString();
-                daysElement.innerHTML = prefix + days.toString();
-                hoursElement.innerHTML = prefix + hours.toString();
-                minutesElement.innerHTML = prefix + minutes.toString();
-                secondsElement.innerHTML = prefix + seconds.toString();
+                // ----- Presentation (v2) -----
+                // Switch the section into "married mode" the first time
+                // we notice the date has passed (and on every page load after).
+                if (isPast !== wasPast) {
+                    wasPast = isPast;
+                    setMode(isPast);
+                }
+
+                setDigit(yearsElement, years);
+                setDigit(monthsElement, months);
+                setDigit(daysElement, days);
+                setDigit(hoursElement, hours);
+                setDigit(minutesElement, minutes);
+                setDigit(secondsElement, seconds);
             }
             
             // Initial countdown update
@@ -105,8 +118,47 @@ const Countdown = (function() {
             console.warn('Countdown elements not found');
         }
     }
-    
+
+    /**
+     * Writes a zero-padded value and triggers the 3D flip
+     * (see @keyframes digitFlip in css/hero.css) when it changes.
+     */
+    function setDigit(element, value) {
+        const text = String(value).padStart(2, '0');
+        if (element.textContent === text) return; // nothing changed
+
+        element.textContent = text;
+        element.classList.remove('flip');
+        // Force a reflow so the animation can restart every second
+        void element.offsetWidth;
+        element.classList.add('flip');
+    }
+
+    /**
+     * Toggles married mode: adds .is-married to the section and swaps
+     * the title. i18n.js also checks this class on language switches,
+     * so the right title survives EN ↔ VI changes.
+     */
+    function setMode(isMarried) {
+        const section = document.querySelector('.countdown');
+        if (!section) return;
+
+        section.classList.toggle('is-married', isMarried);
+
+        const title = section.querySelector('h2');
+        if (title && typeof I18n !== 'undefined') {
+            const key = isMarried ? 'home.countdown.titleMarried' : 'home.countdown.title';
+            const translated = I18n.t(key);
+            // I18n.t returns the key itself when no translation exists
+            if (translated && translated !== key) {
+                title.textContent = translated;
+            }
+        }
+    }
+
     return {
-        init: init
+        init: init,
+        // Other modules (i18n.js) can ask which mode we're in
+        isMarried: function() { return wasPast === true; }
     };
 })();
