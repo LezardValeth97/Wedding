@@ -24,7 +24,6 @@ Card chú rể/cô dâu nghiêng theo chuột (perspective + rotateX/Y) kèm v�
 Các phần tử có `data-reveal` (hỗ trợ `left` / `right` / `zoom` + `--reveal-delay`) hiện dần khi cuộn tới, dùng **IntersectionObserver**. Không có JS → mọi thứ vẫn hiển thị (progressive enhancement qua class cổng `.js-reveal`).
 
 ### 💍 Chế độ "Đã về chung một nhà" — `scripts/countdown.js`
-- **Phép tính calendar-based giữ nguyên 100%** (phần bạn đã sửa kỹ).
 - Sau ngày cưới: thay vì số âm, tiêu đề đổi thành *"Đã Về Chung Một Nhà Được"* và số đếm **tăng dần** — cùng phép toán, câu chuyện ấm áp hơn. Trái tim đập phía trên.
 - Số được pad 2 chữ số (`07`) và **lật 3D** mỗi khi đổi giá trị.
 - Thêm nhãn NĂM/THÁNG vào i18n (trước đây hardcode tiếng Anh).
@@ -93,13 +92,11 @@ GIỮ NGUYÊN  gallery.html/css/js, lightbox.*, rsvp.js, couple.js,
 - Form RSVP: giữ nguyên 100% id/class/thứ tự phần tử.
 - `.person-card` vẫn là con thứ 1 & 2 của container (cho `nth-child`).
 
-Đã có **49 kiểm tra contract tự động + 24 test runtime (jsdom)** đều pass: countdown married-mode, shuffle nhạc đủ vòng không lặp liền kề, toggle + localStorage, reveal, tilt.
-
 ## 5. Chạy thử
 
 ```bash
-npm install      # như cũ
-npm start        # http://localhost:8080
+npm install      
+npm start        
 ```
 
 Chép ảnh vào `images/` và nhạc vào `music/` (cập nhật `playlist.json`) là đủ.
